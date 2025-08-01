@@ -1,0 +1,1 @@
+# make-a-latching-power-switch-circuit-with-auto-power-off-and-on.
