@@ -1,4 +1,4 @@
-# 🔌 Smart Latching Power Switch (Auto ON/OFF + Manual Trigger)
+# 🔌 Latching Power Switch (Auto ON/OFF + Manual Trigger)
 
 This project implements a **latching power switch** using an Arduino, allowing **automatic power cycling** as well as **manual activation via a pushbutton**.
 
