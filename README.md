@@ -1,52 +1,60 @@
-# 🔌 Latching Power Switch with Auto ON/OFF using Arduino
+# 🔌 Smart Latching Power Switch (Auto ON/OFF + Manual Trigger)
 
-This project demonstrates a **latching power switch circuit** that allows an Arduino to **turn itself on and off**, either through a pushbutton or automatically based on timer logic.
+This project implements a **latching power switch** using an Arduino, allowing **automatic power cycling** as well as **manual activation via a pushbutton**.
 
-The design improves power efficiency by disconnecting the main power rail using a **P-Channel MOSFET** and controlling it through a **NPN transistor**.
+The goal is to build a **power-saving circuit** that:
+- Automatically turns **on** and **off** based on a timer.
+- Allows **manual activation** using a button.
+- Powers itself off after a defined period without needing external intervention.
 
 ---
 
 ## 🚀 Features
 
-- Pressing a button turns on the Arduino and an LED.
-- The Arduino remains powered for 10 seconds.
-- After 10 seconds, it powers itself off.
-- After 5 seconds, it powers back on automatically.
-- The LED brightness is controlled using PWM.
+✅ Pressing a button powers the Arduino manually.  
+✅ The Arduino powers itself off after 10 seconds.  
+✅ After 5 seconds of being off, it powers itself back on.  
+✅ No need for holding the button — it "latches" power automatically.  
+✅ Smart power control using software and transistor-based switching.
 
 ---
 
 ## 🧰 Components Used
 
-| Component         | Quantity |
-|------------------|----------|
-| Arduino Uno       | 1        |
-| Pushbutton        | 1        |
-| P-Channel MOSFET  | 1        |
-| NPN Transistor (e.g., 2N2222) | 1        |
-| Resistors (220Ω, 10KΩ) | Several |
-| LED               | 1        |
-| Breadboard & Wires | 1        |
+| Component              | Quantity |
+|------------------------|----------|
+| Arduino Uno            | 1        |
+| Pushbutton             | 1        |
+| P-Channel MOSFET (e.g., IRF9540) | 1 |
+| NPN Transistor (e.g., 2N2222)    | 1 |
+| LED                    | 1        |
+| Resistors (10K, 220Ω)  | As needed |
+| Breadboard & Wires     | 1 set    |
 
 ---
 
-## 🔌 Circuit Overview
+## 🔌 How It Works
 
-- The **pushbutton** connects to pin `D2` (INPUT).
-- The **MOSFET Gate** is controlled via `D5` (OUTPUT).
-- The **PWM pin `D9`** controls the LED brightness.
-- A **NPN transistor** acts as an interface between Arduino and the MOSFET gate to latch the power.
-- The circuit powers OFF by pulling the MOSFET gate HIGH via the transistor.
+- **Manual Start:**  
+  When the pushbutton is pressed, a small current activates the NPN transistor which pulls the gate of the pMOS low → powering the Arduino.  
+  Once powered, the Arduino immediately sets a pin HIGH to "latch" itself on.
+
+- **Auto OFF:**  
+  After 10 seconds, the Arduino stops the latch signal, turning itself off by deactivating the pMOS.
+
+- **Auto ON:**  
+  After a 5-second delay, the Arduino reactivates via a timed loop.
 
 ---
 
-## 🧠 How It Works
+## 🧠 Logic Flow
 
-1. Initially, the Arduino is off.
-2. Pressing the button briefly powers the board through the transistor → the Arduino boots up.
-3. Arduino sets `D5 HIGH`, keeping itself powered.
-4. After 10 seconds, the Arduino sets `D5 LOW`, cutting its own power.
-5. After a 5-second delay, the button logic restarts the board automatically.
+1. Arduino is **off**.
+2. **Pushbutton** is pressed → powers on Arduino.
+3. Arduino **keeps itself on** for 10 seconds.
+4. Arduino **powers off** automatically.
+5. Waits 5 seconds → **powers back on**.
+6. Repeat...
 
 ---
 
