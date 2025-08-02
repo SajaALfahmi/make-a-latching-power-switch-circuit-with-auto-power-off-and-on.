@@ -1,4 +1,4 @@
-# 🔌 Latching Power Switch (Auto ON/OFF + Manual Trigger)
+# 🔌 Smart Latching Power Switch (Auto ON/OFF + Manual Trigger)
 
 This project implements a **latching power switch** using an Arduino, allowing **automatic power cycling** as well as **manual activation via a pushbutton**.
 
@@ -49,12 +49,19 @@ The goal is to build a **power-saving circuit** that:
 
 ## 🧠 Logic Flow
 
-1. Arduino is **off**.
-2. **Pushbutton** is pressed → powers on Arduino.
-3. Arduino **keeps itself on** for 10 seconds.
-4. Arduino **powers off** automatically.
-5. Waits 5 seconds → **powers back on**.
+1. Arduino is **off**.  
+2. **Pushbutton** is pressed → powers on Arduino.  
+3. Arduino **keeps itself on** for 10 seconds.  
+4. Arduino **powers off** automatically.  
+5. Waits 5 seconds → **powers back on**.  
 6. Repeat...
+
+---
+
+## 🎬 Simulation Video
+
+A simulation of this latching power switch circuit has been created in **Tinkercad** to demonstrate its operation virtually.  
+You can watch the process and verify the logic in the video file: `latching_power_switch.mov`.
 
 ---
 
