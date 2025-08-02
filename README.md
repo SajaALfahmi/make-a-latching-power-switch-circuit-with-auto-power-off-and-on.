@@ -57,7 +57,7 @@ const int buttonPin = 2;
 const int latchPin = 5;
 const int pwmPin = 9;
 
-const unsigned long onDuration = 10000;
+const unsigned long onDuration = 10000;  // milliseconds
 const unsigned long offDuration = 5000;
 
 enum PowerState { OFF, ON };
@@ -69,39 +69,44 @@ void setup() {
   pinMode(buttonPin, INPUT);
   pinMode(latchPin, OUTPUT);
   pinMode(pwmPin, OUTPUT);
+
   digitalWrite(latchPin, LOW);
   analogWrite(pwmPin, 0);
+
   Serial.begin(9600);
 }
 
 void loop() {
-  unsigned long now = millis();
+  unsigned long currentTime = millis();
 
+  // Handle button press to start
   if (digitalRead(buttonPin) == HIGH && currentState == OFF) {
     turnOn();
     currentState = ON;
-    stateStartTime = now;
+    stateStartTime = currentTime;
     Serial.println("Power ON by button");
   }
 
-  if (currentState == ON && now - stateStartTime >= onDuration) {
+  // Handle auto OFF
+  if (currentState == ON && currentTime - stateStartTime >= onDuration) {
     turnOff();
     currentState = OFF;
-    stateStartTime = now;
+    stateStartTime = currentTime;
     Serial.println("Power OFF");
   }
 
-  if (currentState == OFF && now - stateStartTime >= offDuration) {
+  // Handle auto ON after delay
+  if (currentState == OFF && currentTime - stateStartTime >= offDuration) {
     turnOn();
     currentState = ON;
-    stateStartTime = now;
+    stateStartTime = currentTime;
     Serial.println("Auto Power ON");
   }
 }
 
 void turnOn() {
   digitalWrite(latchPin, HIGH);
-  analogWrite(pwmPin, 64); // 25% brightness
+  analogWrite(pwmPin, 64);
 }
 
 void turnOff() {
