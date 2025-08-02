@@ -50,7 +50,7 @@ The design improves power efficiency by disconnecting the main power rail using 
 
 ---
 
-## 💡 Arduino Code (Short Version)
+## 💡 Arduino Code 
 
 ```cpp
 const int buttonPin = 2;
